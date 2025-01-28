@@ -4,7 +4,7 @@ import Lenis from "lenis";
 
 export default function App() {
   useEffect(() => {
-    window.scrollTo({ top: 0 });
+    history.scrollRestoration = "manual";
 
     const lenis = new Lenis();
 
