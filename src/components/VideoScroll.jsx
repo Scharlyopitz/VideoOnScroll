@@ -4,9 +4,11 @@ import { useState } from "react";
 export default function VideoScroll() {
   const { scrollYProgress } = useScroll();
 
-  const number = useTransform(scrollYProgress, [0, 1], [1, 86]);
+  const imageLength = 86;
 
-  const [n, setN] = useState(1);
+  const number = useTransform(scrollYProgress, [0, 1], [imageLength, 1]);
+
+  const [n, setN] = useState(imageLength);
 
   function roundNumber() {
     setN(Math.trunc(number.current));

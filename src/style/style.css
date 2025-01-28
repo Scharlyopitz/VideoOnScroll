@@ -40,10 +40,8 @@ main {
   top: 0;
   width: 100%;
   height: 100vh;
-}
-#VideoScroll img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
 }/*# sourceMappingURL=style.css.map */
