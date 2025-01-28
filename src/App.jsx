@@ -1,3 +1,9 @@
+import VideoScroll from "./components/VideoScroll";
+
 export default function App() {
-  return <main>COUCOU</main>;
+  return (
+    <main>
+      <VideoScroll />
+    </main>
+  );
 }
