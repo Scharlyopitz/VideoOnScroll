@@ -18,7 +18,16 @@ export default function VideoScroll() {
 
   return (
     <div id="VideoScroll">
-      <img src={`/${n}.webp`} alt="image" />
+      {[...Array(imageLength)].map((_, i) => {
+        return (
+          <img
+            style={{ opacity: n === i + 1 ? 1 : 0 }}
+            key={i}
+            src={`/${i + 1}.webp`}
+            alt="image"
+          />
+        );
+      })}
     </div>
   );
 }
