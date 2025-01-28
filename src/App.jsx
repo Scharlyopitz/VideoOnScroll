@@ -4,6 +4,8 @@ import Lenis from "lenis";
 
 export default function App() {
   useEffect(() => {
+    window.scrollTo({ top: 0 });
+
     const lenis = new Lenis();
 
     function raf(time) {
