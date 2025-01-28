@@ -28,4 +28,12 @@ html.lenis body {
 main {
   width: 100%;
   height: 200vh;
+}
+
+#VideoScroll {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
 }/*# sourceMappingURL=style.css.map */

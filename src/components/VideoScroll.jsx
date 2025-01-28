@@ -1,3 +1,3 @@
 export default function VideoScroll() {
-  return <div>VideoScroll</div>;
+  return <div id="VideoScroll">VideoScroll</div>;
 }
