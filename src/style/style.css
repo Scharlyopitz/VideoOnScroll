@@ -23,4 +23,9 @@ html.lenis body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+main {
+  width: 100%;
+  height: 200vh;
 }/*# sourceMappingURL=style.css.map */
