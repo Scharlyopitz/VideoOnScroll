@@ -14,8 +14,6 @@ export default function VideoScroll() {
     setN(Math.trunc(number.current));
   }
 
-  console.log(number.current);
-
   window.addEventListener("scroll", roundNumber);
 
   return (
