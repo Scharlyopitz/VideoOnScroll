@@ -4,21 +4,23 @@ import { useState } from "react";
 export default function VideoScroll() {
   const { scrollYProgress } = useScroll();
 
-  const imageLength = 86;
+  const imageLength = 87;
 
   const number = useTransform(scrollYProgress, [0, 1], [imageLength, 1]);
 
-  const [n, setN] = useState(imageLength);
+  const [n, setN] = useState(imageLength - 1);
 
   function roundNumber() {
     setN(Math.trunc(number.current));
   }
 
+  console.log(number.current);
+
   window.addEventListener("scroll", roundNumber);
 
   return (
     <div id="VideoScroll">
-      {[...Array(imageLength)].map((_, i) => {
+      {[...Array(imageLength - 1)].map((_, i) => {
         return (
           <img
             style={{ opacity: n === i + 1 ? 1 : 0 }}
