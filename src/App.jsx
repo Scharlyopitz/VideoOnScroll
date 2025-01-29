@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import VideoScroll from "./components/VideoScroll";
 import Lenis from "lenis";
+import ScrollText from "./components/ScrollText";
 
 export default function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <main>
       <VideoScroll />
+      <ScrollText />
     </main>
   );
 }
