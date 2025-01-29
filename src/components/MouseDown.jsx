@@ -20,16 +20,21 @@ export default function MouseDown() {
         duration: 2,
         ease: [0.76, 0, 0.24, 1],
         repeat: Infinity,
-        repeatDelay: 0.5,
+        repeatDelay: 0.2,
       },
     },
   };
 
   return (
-    <m.div initial="initial" animate="animate" className="MouseDown">
-      <m.div style={{ y, opacity }} className="mouse">
+    <m.div
+      initial="initial"
+      animate="animate"
+      style={{ y, opacity, x: "-50%" }}
+      className="MouseDown"
+    >
+      <div className="mouse">
         <m.div variants={wheelAnimation} className="wheel"></m.div>
-      </m.div>
+      </div>
     </m.div>
   );
 }
