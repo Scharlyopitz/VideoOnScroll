@@ -8,6 +8,15 @@
   white-space: nowrap;
   text-transform: uppercase;
 
+  &::after {
+    content: "scroll down";
+    position: absolute;
+    bottom: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+  }
+
   .mouse {
     position: relative;
     width: 50px;
