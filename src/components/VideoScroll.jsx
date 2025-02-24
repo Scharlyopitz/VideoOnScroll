@@ -1,5 +1,4 @@
 import { useScroll, useTransform, motion as m } from "motion/react";
-import { image } from "motion/react-client";
 import { useEffect, useRef, useState } from "react";
 
 export default function VideoScroll() {
@@ -30,21 +29,7 @@ export default function VideoScroll() {
     }
   };
 
-  const [sizes, setSizes] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  const resizeCanvas = () => {
-    const resize = () => {
-      setSizes({ width: window.innerWidth, height: window.innerHeight });
-    };
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  };
-
   useEffect(() => {
-    resizeCanvas();
     preloaderImages();
     window.addEventListener("scroll", setFrameOnScroll);
     return () => window.removeEventListener("scroll", setFrameOnScroll);
@@ -62,7 +47,7 @@ export default function VideoScroll() {
 
     const render = () => {
       context.drawImage(images[frameIndex], 0, 0);
-      window.requestAnimationFrame(render);
+      requestAnimationFrame(render);
     };
 
     render();
