@@ -1,33 +1,76 @@
 import { useScroll, useTransform, motion as m } from "motion/react";
-import { useState } from "react";
+import { image } from "motion/react-client";
+import { useEffect, useRef, useState } from "react";
 
 export default function VideoScroll() {
+  const canvas = useRef(null);
+
+  const [images, setImages] = useState([]);
+  const [frameIndex, setFrameIndex] = useState(0);
+  const frames = 86;
+
   const { scrollYProgress } = useScroll();
 
-  const imageLength = 87;
+  const progressIndex = useTransform(scrollYProgress, [0, 1], [0, frames - 1]);
 
-  const number = useTransform(scrollYProgress, [0, 1], [imageLength, 1]);
+  const setFrameOnScroll = () => {
+    setFrameIndex(Math.trunc(progressIndex.current));
+  };
 
-  const [n, setN] = useState(imageLength - 1);
+  const getCurrentFrame = (i) => {
+    return `/${i.toString()}.webp`;
+  };
 
-  function roundNumber() {
-    setN(Math.trunc(number.current));
-  }
+  const preloaderImages = () => {
+    for (let i = 1; i < frames; i++) {
+      const img = new Image();
+      const imgSrc = getCurrentFrame(i);
+      img.src = imgSrc;
+      setImages((prevImages) => [...prevImages, img]);
+    }
+  };
 
-  window.addEventListener("scroll", roundNumber);
+  const [sizes, setSizes] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const resizeCanvas = () => {
+    const resize = () => {
+      setSizes({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  };
+
+  useEffect(() => {
+    resizeCanvas();
+    preloaderImages();
+    window.addEventListener("scroll", setFrameOnScroll);
+    return () => window.removeEventListener("scroll", setFrameOnScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!canvas.current || images.length < 1) {
+      return;
+    }
+
+    const context = canvas.current.getContext("2d");
+
+    context.canvas.width = 1000;
+    context.canvas.height = 714;
+
+    const render = () => {
+      context.drawImage(images[frameIndex], 0, 0);
+      window.requestAnimationFrame(render);
+    };
+
+    render();
+  }, [frameIndex, images]);
 
   return (
     <div id="VideoScroll">
-      {[...Array(imageLength - 1)].map((_, i) => {
-        return (
-          <img
-            style={{ opacity: n === i + 1 ? 1 : 0 }}
-            key={i}
-            src={`/${i + 1}.webp`}
-            alt="image"
-          />
-        );
-      })}
+      <canvas ref={canvas}></canvas>
     </div>
   );
 }
