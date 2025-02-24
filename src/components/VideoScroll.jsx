@@ -5,24 +5,24 @@ import { useEffect, useRef, useState } from "react";
 export default function VideoScroll() {
   const canvas = useRef(null);
 
-  const [images, setImages] = useState([]);
-  const [frameIndex, setFrameIndex] = useState(0);
   const frames = 86;
+  const [images, setImages] = useState([]);
+  const [frameIndex, setFrameIndex] = useState(frames - 1);
 
   const { scrollYProgress } = useScroll();
 
-  const progressIndex = useTransform(scrollYProgress, [0, 1], [0, frames - 1]);
+  const progressIndex = useTransform(scrollYProgress, [0, 1], [frames - 1, 0]);
 
   const setFrameOnScroll = () => {
     setFrameIndex(Math.trunc(progressIndex.current));
   };
 
   const getCurrentFrame = (i) => {
-    return `/${i.toString()}.webp`;
+    return `/${(i + 1).toString()}.webp`;
   };
 
   const preloaderImages = () => {
-    for (let i = 1; i < frames; i++) {
+    for (let i = 0; i < frames; i++) {
       const img = new Image();
       const imgSrc = getCurrentFrame(i);
       img.src = imgSrc;
