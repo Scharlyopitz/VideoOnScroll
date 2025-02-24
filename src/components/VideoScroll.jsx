@@ -44,13 +44,14 @@ export default function VideoScroll() {
 
     context.canvas.width = 1000;
     context.canvas.height = 714;
-
+    let animation;
     const render = () => {
       context.drawImage(images[frameIndex], 0, 0);
-      requestAnimationFrame(render);
+      animation = requestAnimationFrame(render);
     };
 
     render();
+    return () => cancelAnimationFrame(animation);
   }, [frameIndex, images]);
 
   return (
